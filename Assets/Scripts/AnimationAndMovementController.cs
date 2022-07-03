@@ -40,7 +40,7 @@ public class AnimationAndMovementController : MonoBehaviour
     bool _isJumpAnimating = false;
     int _jumpCount = 0;
     Dictionary<int, float> initialJumpVelocities = new Dictionary<int, float>();
-    Dictionary<int, float> jumpGravities =  new Dictionary<int, float>();
+    Dictionary<int, float> jumpGravities = new Dictionary<int, float>();
     Coroutine currentJumpResetRoutine = null;
 
     void Awake()
@@ -49,7 +49,7 @@ public class AnimationAndMovementController : MonoBehaviour
         Cursor.visible = false;
         _playerInput = new PlayerInput();
         _characterController = GetComponent<CharacterController>();
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
 
         _isWalkingHash = Animator.StringToHash("IsWalking");
         _isRunningHash = Animator.StringToHash("IsRunning");
@@ -63,7 +63,7 @@ public class AnimationAndMovementController : MonoBehaviour
         _playerInput.CharacterControls.Run.canceled += onRun;
         _playerInput.CharacterControls.Jump.started += OnJump;
         _playerInput.CharacterControls.Jump.canceled += OnJump;
-       
+
 
         setupJumpVariables();
     }
@@ -93,14 +93,14 @@ public class AnimationAndMovementController : MonoBehaviour
         jumpGravities.Add(3, thirdJumpGravity);
     }
     void handleJump()
-    { 
+    {
 
         if (!_isJumping && _characterController.isGrounded && _isJumpPressed)
+        {
+            if (_jumpCount < 3 && currentJumpResetRoutine != null)
             {
-                if (_jumpCount < 3 && currentJumpResetRoutine != null)
-                {
-                    StopCoroutine(currentJumpResetRoutine);
-                }
+                StopCoroutine(currentJumpResetRoutine);
+            }
             _animator.SetBool(_isJumpingHash, true);
             _isJumpAnimating = true;
             _isJumping = true;
@@ -110,20 +110,20 @@ public class AnimationAndMovementController : MonoBehaviour
             _currentMovement.y = initialJumpVelocities[_jumpCount];
             _appliedMovement.y = initialJumpVelocities[_jumpCount];
         }
-        else if(!_isJumpPressed && _isJumping && _characterController.isGrounded)
+        else if (!_isJumpPressed && _isJumping && _characterController.isGrounded)
         {
             _isJumping = false;
         }
     }
 
-        IEnumerator jumpResetRoutine()
-        {
-            yield return new WaitForSeconds(.5f);
-            _jumpCount = 0;
-        }
-    
+    IEnumerator jumpResetRoutine()
+    {
+        yield return new WaitForSeconds(.5f);
+        _jumpCount = 0;
+    }
 
-    
+
+
     void OnJump(InputAction.CallbackContext context)
     {
         _isJumpPressed = context.ReadValueAsButton();
@@ -137,34 +137,19 @@ public class AnimationAndMovementController : MonoBehaviour
 
     void handleRotation()
     {
-        Vector3 positionToLookAt;
-
-        positionToLookAt.x = _currentMovement.x;
-        positionToLookAt.y = 1.0f;
-        positionToLookAt.z = _currentMovement.z;
-
-        Quaternion currentRotation = transform.rotation;
-
         if (_isMovementPressed)
         {
-             Vector3 direction = Vector3.Cross(camera.right, Vector3.up);
-             Quaternion rotation = Quaternion.LookRotation(direction);
-             positionToLookAt = rotation * Vector3.forward;
-           
-           
-            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, _rotationFactorPerFrame * Time.deltaTime);
-            
-
-            Vector3 move = transform.forward * _currentMovementInput.y + transform.right * _currentMovementInput.x;
-            
+            Vector3 direction = Vector3.Cross(camera.right, Vector3.up);
+            Vector3 move = direction * _currentMovementInput.y + camera.right * _currentMovementInput.x;
             _currentMovement.x = move.x;
             _currentMovement.z = move.z;
             _currentRunMovement.x = move.x * _runMultiplier;
             _currentRunMovement.z = move.z * _runMultiplier;
-            
-        }
 
+            Quaternion targetRotation = Quaternion.LookRotation(move, Vector3.up);
+            Quaternion currentRotation = transform.rotation;
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, _rotationFactorPerFrame * Time.deltaTime);
+        }
     }
 
 
@@ -178,7 +163,7 @@ public class AnimationAndMovementController : MonoBehaviour
         _currentRunMovement.x = _currentMovementInput.x * _runMultiplier;
         _currentRunMovement.z = _currentMovementInput.y * _runMultiplier;
         _isMovementPressed = _currentMovementInput.x != 0 || _currentMovementInput.y != 0;
-        
+
 
     }
 
@@ -234,12 +219,12 @@ public class AnimationAndMovementController : MonoBehaviour
             _currentMovement.y = _groundedGravity;
             _appliedMovement.y = _groundedGravity;
         }
-        else if(isFalling)
+        else if (isFalling)
         {
             float previousYVelocity = _currentMovement.y;
             _currentMovement.y = _currentMovement.y + (jumpGravities[_jumpCount] * fallMultiplier * Time.deltaTime);
             _appliedMovement.y = Mathf.Max((previousYVelocity + _currentMovement.y) * .5f, -20.0f);
-           
+
 
         }
         else
@@ -247,7 +232,7 @@ public class AnimationAndMovementController : MonoBehaviour
             float previousYVelocity = _currentMovement.y;
             _currentMovement.y = _currentMovement.y + (jumpGravities[_jumpCount] * Time.deltaTime);
             _appliedMovement.y = (previousYVelocity + _currentMovement.y) * .5f;
-            
+
         }
     }
 
@@ -259,7 +244,7 @@ public class AnimationAndMovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         handleRotation();
         handleAnimation();
 
