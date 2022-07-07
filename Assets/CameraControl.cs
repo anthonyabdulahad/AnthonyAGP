@@ -28,12 +28,15 @@ public class CameraControl : MonoBehaviour
             idle = 0;
 
         }
+        
         if (idle > centertime)
         {
-           
+            orbit.Center();
         }
-
-        orbit.Rotate(pan, tilt);
+        else
+        {
+            orbit.Rotate(pan, tilt);
+        }
     }
     
 }

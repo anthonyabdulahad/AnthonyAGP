@@ -11,10 +11,6 @@ public class TestKeyboardInput : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Jump"))
-        {
-            orbit.autoLevel = !orbit.autoLevel;
-        }
         orbit.Rotate(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 }
