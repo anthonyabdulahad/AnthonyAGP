@@ -43,6 +43,12 @@ public class AnimationAndMovementController : MonoBehaviour
     Dictionary<int, float> jumpGravities = new Dictionary<int, float>();
     Coroutine currentJumpResetRoutine = null;
 
+    private float coyoteTime = 0.3f;
+    private float coyoteTimeCounter;
+
+    private float jumpBufferTime = 2f;
+    private float jumpBufferCounter;
+
     void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -95,8 +101,10 @@ public class AnimationAndMovementController : MonoBehaviour
     void handleJump()
     {
 
-        if (!_isJumping && _characterController.isGrounded && _isJumpPressed)
+        if (!_isJumping && coyoteTimeCounter > 0f && jumpBufferCounter > 0f)
         {
+            jumpBufferCounter = 0f;
+
             if (_jumpCount < 3 && currentJumpResetRoutine != null)
             {
                 StopCoroutine(currentJumpResetRoutine);
@@ -109,10 +117,14 @@ public class AnimationAndMovementController : MonoBehaviour
 
             _currentMovement.y = initialJumpVelocities[_jumpCount];
             _appliedMovement.y = initialJumpVelocities[_jumpCount];
+
+            coyoteTimeCounter = 0f;
         }
         else if (!_isJumpPressed && _isJumping && _characterController.isGrounded)
         {
             _isJumping = false;
+
+
         }
     }
 
@@ -244,6 +256,23 @@ public class AnimationAndMovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_characterController.isGrounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpBufferCounter = jumpBufferTime;
+        }
+        else
+        {
+           jumpBufferCounter -= Time.deltaTime;
+        }
 
         handleRotation();
         handleAnimation();
