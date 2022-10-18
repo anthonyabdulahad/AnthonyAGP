@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class VerticalMovingPlaform : Platform
 {
+    public Rigidbody platform;
     public float speed = 5;
-    public GameObject Platform;
+    
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        Platform.transform.Translate(0, speed * Time.deltaTime, 0);
+        platform.MovePosition(platform.position + new Vector3(0, speed * Time.deltaTime, 0));
     }
 
     public override void Reverse()

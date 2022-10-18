@@ -26,6 +26,7 @@ public class PlatformAttach : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Debug.Log("Player on platform");
             player = other.GetComponent<AnimationAndMovementController>();
         }
     }
@@ -34,6 +35,7 @@ public class PlatformAttach : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Debug.Log("Player off platform");
             if (player != null)
             {
                 player.SetPlatformMovement(Vector3.zero);
