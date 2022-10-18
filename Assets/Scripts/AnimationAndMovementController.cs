@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,7 @@ public class AnimationAndMovementController : MonoBehaviour
     float _gravity = -9.8f;
     float _groundedGravity = -.05f;
 
+    bool Isdashing;
     bool _isJumpPressed = false;
     float _initialJumpVelocity;
     float _maxJumpHeight = 3.0f;
@@ -184,7 +186,7 @@ public class AnimationAndMovementController : MonoBehaviour
     void handleAnimation()
     {
         bool isWalking = _animator.GetBool(_isWalkingHash);
-        bool isRunning = _animator.GetBool(_isRunningHash);
+        bool isRunning = _animator.GetBool(_isRunningHash)&& !Isdashing; 
 
         if (_isMovementPressed && !isWalking)
         {
@@ -230,14 +232,17 @@ public class AnimationAndMovementController : MonoBehaviour
             }
             _currentMovement.y = _groundedGravity;
             _appliedMovement.y = _groundedGravity;
+
+            
         }
         else if (isFalling)
         {
-            float previousYVelocity = _currentMovement.y;
-            _currentMovement.y = _currentMovement.y + (jumpGravities[_jumpCount] * fallMultiplier * Time.deltaTime);
-            _appliedMovement.y = Mathf.Max((previousYVelocity + _currentMovement.y) * .5f, -20.0f);
-
-
+            if (!Isdashing)
+            {
+                float previousYVelocity = _currentMovement.y;
+                _currentMovement.y = _currentMovement.y + (jumpGravities[_jumpCount] * fallMultiplier * Time.deltaTime);
+                _appliedMovement.y = Mathf.Max((previousYVelocity + _currentMovement.y) * .5f, -20.0f);
+            }
         }
         else
         {
@@ -277,15 +282,18 @@ public class AnimationAndMovementController : MonoBehaviour
         handleRotation();
         handleAnimation();
 
-        if (_isRunPressed)
+        if (!Isdashing)
         {
-            _appliedMovement.x = _currentRunMovement.x;
-            _appliedMovement.z = _currentRunMovement.z;
-        }
-        else
-        {
-            _appliedMovement.x = _currentMovement.x;
-            _appliedMovement.z = _currentMovement.z;
+            if (_isRunPressed)
+            {
+                _appliedMovement.x = _currentRunMovement.x;
+                _appliedMovement.z = _currentRunMovement.z;
+            }
+            else
+            {
+                _appliedMovement.x = _currentMovement.x;
+                _appliedMovement.z = _currentMovement.z;
+            }
         }
 
         _characterController.Move(_appliedMovement * Time.deltaTime + _platformMovement);
@@ -303,5 +311,24 @@ public class AnimationAndMovementController : MonoBehaviour
     void OnDisable()
     {
         _playerInput.CharacterControls.Disable();
+    }
+
+    internal void Dash(float speed)
+    {
+        if (_isJumping)
+        {
+            Isdashing = speed > 0f;
+            Vector3 direction = transform.forward;
+            _currentMovement.y = 0;
+            _appliedMovement.y = 0;
+            _currentMovement.z = direction.z * speed;
+            _appliedMovement.z = direction.z * speed;
+            _currentMovement.x = direction.x * speed;
+            _appliedMovement.x = direction.x * speed;
+        }
+        else
+        {
+            Isdashing = false;
+        }
     }
 }
