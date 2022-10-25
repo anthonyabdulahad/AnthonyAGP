@@ -10,6 +10,7 @@ public class MovementDash : MonoBehaviour
 
     public float DashSpeed;
     public float dashTime;
+    bool dashing;
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +21,9 @@ public class MovementDash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && !dashing)
         {
+            dashing = true;
             StartCoroutine(Dash());
         }
     }
@@ -39,5 +41,9 @@ public class MovementDash : MonoBehaviour
         }
 
         moveScript.Dash(0);
+        yield return new WaitForSeconds(2.0f);
+        dashing = false;
     }
+
+
 }
