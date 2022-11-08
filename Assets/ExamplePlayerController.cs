@@ -2,7 +2,7 @@ using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
  
-public class ExamplePlayerController : MonoBehaviour
+public class ExamplePlayerController : MonoBehaviour, PlatformMovement
 {
 
     [SerializeField]
@@ -21,6 +21,14 @@ public class ExamplePlayerController : MonoBehaviour
     private const float JumpForce = 35f;
     private const float Gravity = 15f;
 
+    private float coyoteTime = 0.3f;
+    private float coyoteTimeCounter;
+
+    private float jumpBufferTime = 2f;
+    private float jumpBufferCounter;
+
+    private Vector3 platformMovement;
+
     void Start()
     {
         _controller = GetComponent<CharacterController>();
@@ -33,7 +41,21 @@ public class ExamplePlayerController : MonoBehaviour
     {
         if (_controller.isGrounded)
         {
+            coyoteTimeCounter = coyoteTime;
             _animator.SetBool(_isJumpingHash, false);
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpBufferCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
         }
         ReadMovementInputs();
         ReadJumpInputs();
@@ -59,7 +81,7 @@ public class ExamplePlayerController : MonoBehaviour
         if (_controller.isGrounded && Input.GetButtonDown("Jump"))
         {
             _movementInput.y = JumpForce;
-           // _animator.SetBool(_isJumpingHash, true);
+            _animator.SetBool(_isJumpingHash, true);
         }
 
         if (!_controller.isGrounded || _movementInput.y > 0)
@@ -92,10 +114,15 @@ public class ExamplePlayerController : MonoBehaviour
 
             }
             moveDirection.y = _movementInput.y;
-            _controller.Move(moveDirection * Time.deltaTime);
+            _controller.Move(moveDirection * Time.deltaTime + platformMovement);
             transform.rotation = Quaternion.LookRotation(_rotationInput * Time.deltaTime);
            
         }
 
+    }
+
+    public void SetPlatformMovement(Vector3 platform)
+    {
+        platformMovement = platform;
     }
 }

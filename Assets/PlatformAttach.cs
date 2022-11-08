@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlatformAttach : MonoBehaviour
 {
-    AnimationAndMovementController player;
+    PlatformMovement player;
     Vector3 previous;
 
     void Start()
@@ -27,7 +27,15 @@ public class PlatformAttach : MonoBehaviour
         if (other.tag == "Player")
         {
             Debug.Log("Player on platform");
-            player = other.GetComponent<AnimationAndMovementController>();
+            foreach (var component in other.GetComponents<Behaviour>())
+            {
+                if (component.enabled && component is PlatformMovement)
+                {
+                    player = component as PlatformMovement;
+                    break;
+                }
+            }
+            Debug.Log($"platform component {player}", other.gameObject);
         }
     }
 
