@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class AnimationAndMovementController : MonoBehaviour
+public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
 {
     new public Transform camera;
     PlayerInput _playerInput;
@@ -154,7 +154,7 @@ public class AnimationAndMovementController : MonoBehaviour
         if (_isMovementPressed)
         {
             Vector3 direction = Vector3.Cross(camera.right, Vector3.up);
-            Vector3 move = direction * _currentMovementInput.y + camera.right * _currentMovementInput.x;
+            Vector3 move = Vector3.forward * _currentMovementInput.y + Vector3.right * _currentMovementInput.x;
             _currentMovement.x = move.x;
             _currentMovement.z = move.z;
             _currentRunMovement.x = move.x * _runMultiplier;
