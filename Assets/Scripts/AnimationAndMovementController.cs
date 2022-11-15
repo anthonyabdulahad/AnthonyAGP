@@ -7,10 +7,13 @@ using UnityEngine.InputSystem;
 
 public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
 {
+    public CameraControl camControl;
     new public Transform camera;
+    public bool cameraRelative;
     PlayerInput _playerInput;
     CharacterController _characterController;
     Animator _animator;
+    Vector2 camMovementInput;
 
     int _isWalkingHash;
     int _isRunningHash;
@@ -24,7 +27,7 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
     bool _isRunPressed;
 
     float _rotationFactorPerFrame = 10.0f;
-    float _runMultiplier = 5.0f;
+    float _runMultiplier = 7.0f;
     int _zero = 0;
 
     // gravity varibles
@@ -55,7 +58,7 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        _playerInput = new PlayerInput();
+        //_playerInput = new PlayerInput();
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponentInChildren<Animator>();
 
@@ -64,7 +67,7 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
         _isJumpingHash = Animator.StringToHash("isJumping");
         _jumpCountHash = Animator.StringToHash("jumpCount");
 
-        _playerInput.CharacterControls.Move.started += onMovementInput;
+        /*_playerInput.CharacterControls.Move.started += onMovementInput;
         _playerInput.CharacterControls.Move.canceled += onMovementInput;
         _playerInput.CharacterControls.Move.performed += onMovementInput;
         _playerInput.CharacterControls.Run.started += onRun;
@@ -72,6 +75,9 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
         _playerInput.CharacterControls.Jump.started += OnJump;
         _playerInput.CharacterControls.Jump.canceled += OnJump;
 
+        _playerInput.CharacterControls.CamControl.started += CamControl;
+        _playerInput.CharacterControls.CamControl.performed += CamControl;
+        _playerInput.CharacterControls.CamControl.canceled += CamControl;*/
 
         setupJumpVariables();
     }
@@ -138,15 +144,21 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
 
 
 
-    void OnJump(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
         _isJumpPressed = context.ReadValueAsButton();
         Debug.Log($"{_isJumpPressed}");
     }
 
-    void onRun(InputAction.CallbackContext context)
+    public void OnRun(InputValue value)
     {
-        _isRunPressed = context.ReadValueAsButton();
+        _isRunPressed = value.isPressed;
+    }
+
+    public void OnCamControl(InputValue value)
+    {
+        camMovementInput = value.Get<Vector2>();
+     
     }
 
     void handleRotation()
@@ -154,7 +166,15 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
         if (_isMovementPressed)
         {
             Vector3 direction = Vector3.Cross(camera.right, Vector3.up);
-            Vector3 move = Vector3.forward * _currentMovementInput.y + Vector3.right * _currentMovementInput.x;
+            Vector3 move;
+            if(cameraRelative)
+            {
+                move = Vector3.ProjectOnPlane(camera.forward, Vector3.up) * _currentMovementInput.y + camera.right * _currentMovementInput.x;
+            }
+            else
+            {
+                move = Vector3.forward * _currentMovementInput.y + Vector3.right * _currentMovementInput.x;
+            }
             _currentMovement.x = move.x;
             _currentMovement.z = move.z;
             _currentRunMovement.x = move.x * _runMultiplier;
@@ -166,12 +186,21 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
         }
     }
 
+    void OnMove(InputValue value)
+    {
+        _currentMovementInput = value.Get<Vector2>();
+        _currentMovement.x = _currentMovementInput.x;
+        _currentMovement.z = _currentMovementInput.y;
+        _currentRunMovement.x = _currentMovementInput.x * _runMultiplier;
+        _currentRunMovement.z = _currentMovementInput.y * _runMultiplier;
+        _isMovementPressed = _currentMovementInput.x != 0 || _currentMovementInput.y != 0;
+    }
 
-
-    void onMovementInput(InputAction.CallbackContext context)
+    /*void onMovementInput(InputValue context)
     {
 
-        _currentMovementInput = context.ReadValue<Vector2>();
+        //_currentMovementInput = context.ReadValue<Vector2>();
+        _currentMovementInput = (Vector2)context.Get();
         _currentMovement.x = _currentMovementInput.x;
         _currentMovement.z = _currentMovementInput.y;
         _currentRunMovement.x = _currentMovementInput.x * _runMultiplier;
@@ -179,7 +208,7 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
         _isMovementPressed = _currentMovementInput.x != 0 || _currentMovementInput.y != 0;
 
 
-    }
+    }*/
 
 
 
@@ -301,16 +330,18 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
         handleGravity();
         handleJump();
 
+        camControl.ControlCamera(camMovementInput);
+
     }
 
     void OnEnable()
     {
-        _playerInput.CharacterControls.Enable();
+        //_playerInput.CharacterControls.Enable();
     }
 
     void OnDisable()
     {
-        _playerInput.CharacterControls.Disable();
+        //_playerInput.CharacterControls.Disable();
     }
 
     internal void Dash(float speed)

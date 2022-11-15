@@ -19,7 +19,9 @@ public class CameraControl : MonoBehaviour
         float pan = Input.GetAxis("Mouse X");
         float tilt = Input.GetAxis("Mouse Y");
 
-        if (pan ==0 && tilt ==0 && !Player.IsMovementPressed())
+        ControlCamera(new Vector2(pan, tilt));
+
+        /*if (pan ==0 && tilt ==0 && !Player.IsMovementPressed())
         {
             idle += Time.deltaTime;
         }
@@ -29,6 +31,31 @@ public class CameraControl : MonoBehaviour
 
         }
         
+        if (idle > centertime)
+        {
+            orbit.Center();
+        }
+        else
+        {
+            orbit.Rotate(pan, tilt);
+        }*/
+    }
+
+    public void ControlCamera(Vector2 value)
+    {
+        float pan = value.x;
+        float tilt = value.y;
+
+        if (pan == 0 && tilt == 0 && !Player.IsMovementPressed())
+        {
+            idle += Time.deltaTime;
+        }
+        else
+        {
+            idle = 0;
+
+        }
+
         if (idle > centertime)
         {
             orbit.Center();
