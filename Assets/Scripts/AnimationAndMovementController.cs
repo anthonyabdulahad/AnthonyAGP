@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
 {
+    public float mouseSensitivity = 1.0f;
     public CameraControl camControl;
     new public Transform camera;
     public bool cameraRelative;
@@ -37,7 +38,7 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
     bool Isdashing;
     bool _isJumpPressed = false;
     float _initialJumpVelocity;
-    float _maxJumpHeight = 3.0f;
+    float _maxJumpHeight = 5.0f;
     float _maxJumpTime = 0.75f;
     bool _isJumping = false;
     int _isJumpingHash;
@@ -144,10 +145,9 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
 
 
 
-    public void OnJump(InputAction.CallbackContext context)
+    public void OnJump(InputValue context)
     {
-        _isJumpPressed = context.ReadValueAsButton();
-        Debug.Log($"{_isJumpPressed}");
+        _isJumpPressed = context.isPressed;
     }
 
     public void OnRun(InputValue value)
@@ -158,7 +158,6 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
     public void OnCamControl(InputValue value)
     {
         camMovementInput = value.Get<Vector2>();
-     
     }
 
     void handleRotation()
@@ -246,7 +245,7 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
 
         if (_characterController.isGrounded)
         {
-            Debug.Log("grounded");
+            //Debug.Log("grounded");
             if (_isJumpAnimating)
             {
 
@@ -299,8 +298,9 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
             coyoteTimeCounter -= Time.deltaTime;
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (_isJumpPressed)
         {
+            _isJumpPressed = false;
             jumpBufferCounter = jumpBufferTime;
         }
         else
@@ -330,7 +330,14 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
         handleGravity();
         handleJump();
 
-        camControl.ControlCamera(camMovementInput);
+        if (camMovementInput.magnitude > 0.0f)
+        {
+            camControl.ControlCamera(camMovementInput);
+        }
+        else
+        {
+            camControl.ControlCamera(Mouse.current.delta.ReadValue() * mouseSensitivity);
+        }
 
     }
 

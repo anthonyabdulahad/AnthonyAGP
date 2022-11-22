@@ -516,7 +516,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33908
+  m_Name: pb_Mesh24398
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -741,7 +741,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22810
+  m_Name: pb_Mesh24358
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -980,6 +980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdb05c319ea19b45ad97b9eacd1f614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseSensitivity: 0.55
   camControl: {fileID: 1609271267}
   camera: {fileID: 1609271265}
   cameraRelative: 1
@@ -1617,7 +1618,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33882
+  m_Name: pb_Mesh24372
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1781,7 +1782,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33776
+  m_Name: pb_Mesh24266
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1945,7 +1946,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33748
+  m_Name: pb_Mesh24234
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3151,7 +3152,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33834
+  m_Name: pb_Mesh24324
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3631,7 +3632,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33896
+  m_Name: pb_Mesh24386
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

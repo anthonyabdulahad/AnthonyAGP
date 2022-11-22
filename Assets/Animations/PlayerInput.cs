@@ -38,7 +38,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Run"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""4421f9e6-6b4f-431f-b772-f61f7998711f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -47,7 +47,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Jump"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""43ce86e1-d4ed-4d15-a379-b2857b87b2b2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": ""NormalizeVector2"",
@@ -211,7 +211,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""25fa3d8f-e12b-44f2-bea6-63afcdb707f3"",
-                    ""path"": ""<DualShockGamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -236,7 +236,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""CamControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -247,7 +247,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""CamControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -258,7 +258,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""CamControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -269,10 +269,21 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""CamControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ecf49cd-a262-42b6-9109-7c00e54a55a7"",
+                    ""path"": ""*/{Secondary2DMotion}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamControl"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
