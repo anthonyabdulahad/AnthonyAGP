@@ -28,7 +28,7 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
     bool _isRunPressed;
 
     float _rotationFactorPerFrame = 10.0f;
-    float _runMultiplier = 7.0f;
+    float _runMultiplier = 8.0f;
     int _zero = 0;
 
     // gravity varibles
@@ -168,7 +168,7 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
             Vector3 move;
             if(cameraRelative)
             {
-                move = Vector3.ProjectOnPlane(camera.forward, Vector3.up) * _currentMovementInput.y + camera.right * _currentMovementInput.x;
+                move = Vector3.ProjectOnPlane(camera.forward, Vector3.up).normalized * _currentMovementInput.y + camera.right * _currentMovementInput.x;
             }
             else
             {
