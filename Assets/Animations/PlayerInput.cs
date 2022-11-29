@@ -59,7 +59,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""b7821d81-94a9-4be3-bba9-e76f4c833dc6"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 }
@@ -222,7 +222,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""39a4ce88-af63-4028-b5a0-c7024cc2505a"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -277,10 +277,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2ecf49cd-a262-42b6-9109-7c00e54a55a7"",
-                    ""path"": ""*/{Secondary2DMotion}"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
+                    ""processors"": ""ScaleVector2(x=0.1,y=0.1)"",
+                    ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""CamControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -301,12 +301,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Keyboard"",
-            ""bindingGroup"": ""Keyboard"",
+            ""name"": ""Keyboard and Mouse"",
+            ""bindingGroup"": ""Keyboard and Mouse"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": true,
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
                     ""isOR"": false
                 }
             ]
@@ -440,13 +445,13 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_ControllerSchemeIndex];
         }
     }
-    private int m_KeyboardSchemeIndex = -1;
-    public InputControlScheme KeyboardScheme
+    private int m_KeyboardandMouseSchemeIndex = -1;
+    public InputControlScheme KeyboardandMouseScheme
     {
         get
         {
-            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
-            return asset.controlSchemes[m_KeyboardSchemeIndex];
+            if (m_KeyboardandMouseSchemeIndex == -1) m_KeyboardandMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard and Mouse");
+            return asset.controlSchemes[m_KeyboardandMouseSchemeIndex];
         }
     }
     public interface ICharacterControlsActions

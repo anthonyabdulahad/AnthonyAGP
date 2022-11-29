@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 
 public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
 {
-    public float mouseSensitivity = 1.0f;
     public CameraControl camControl;
     new public Transform camera;
     public bool cameraRelative;
@@ -152,6 +151,7 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
 
     public void OnRun(InputValue value)
     {
+
         _isRunPressed = value.isPressed;
     }
 
@@ -164,11 +164,16 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
     {
         if (_isMovementPressed)
         {
-            Vector3 direction = Vector3.Cross(camera.right, Vector3.up);
             Vector3 move;
             if(cameraRelative)
             {
-                move = Vector3.ProjectOnPlane(camera.forward, Vector3.up).normalized * _currentMovementInput.y + camera.right * _currentMovementInput.x;
+                Vector3 direction = Vector3.ProjectOnPlane(camera.forward, Vector3.up);
+                if (direction.sqrMagnitude < 0.1f)
+                {
+                    direction = Vector3.ProjectOnPlane(camera.up, Vector3.up);
+                }
+                direction.Normalize();
+                move = direction * _currentMovementInput.y + camera.right * _currentMovementInput.x;
             }
             else
             {
@@ -330,15 +335,7 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
         handleGravity();
         handleJump();
 
-        if (camMovementInput.magnitude > 0.0f)
-        {
-            camControl.ControlCamera(camMovementInput);
-        }
-        else
-        {
-            camControl.ControlCamera(Mouse.current.delta.ReadValue() * mouseSensitivity);
-        }
-
+        camControl.ControlCamera(camMovementInput);
     }
 
     void OnEnable()
