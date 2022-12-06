@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
  
@@ -18,7 +19,7 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
     public Vector3 _movementInput;
     private Vector3 _rotationInput;
 
-    private const float JumpForce = 35f;
+    private const float JumpForce = 32f;
     private const float Gravity = 15f;
 
     private float coyoteTime = 0.3f;
@@ -26,6 +27,7 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
 
     private float jumpBufferTime = 2f;
     private float jumpBufferCounter;
+    private bool _isJumpPressed;
 
     private Vector3 platformMovement;
 
@@ -36,7 +38,10 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
         _isRunningHash = Animator.StringToHash("IsRunning");
         _isJumpingHash = Animator.StringToHash("isJumping");
     }
-
+    public void OnJump(InputValue context)
+    {
+        _isJumpPressed = context.isPressed;
+    }
     void Update()
     {
         if (_controller.isGrounded)
@@ -49,7 +54,7 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
             coyoteTimeCounter -= Time.deltaTime;
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (_isJumpPressed)
         {
             jumpBufferCounter = jumpBufferTime;
         }
@@ -78,7 +83,7 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
 
     void ReadJumpInputs()
     {
-        if (_controller.isGrounded && Input.GetButtonDown("Jump"))
+        if (_controller.isGrounded && _isJumpPressed)
         {
             _movementInput.y = JumpForce;
             _animator.SetBool(_isJumpingHash, true);
