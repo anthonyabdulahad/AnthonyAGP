@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using UnityEngine;
 
@@ -11,6 +12,34 @@ public class ExamplePlayerCamera : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera CameraBackwards;
 
+    internal void camerasideview()
+    {
+        _orientation = 0;
+        CameraForward.Priority = 1;
+        CameraBackwards.Priority = 2;
+        CameraSideview.Priority = 3;
+        Debug.Log("Sideview camera");
+    }
+
+    internal void camarabackview()
+    {
+        _orientation = -1;
+        CameraForward.Priority = 2;
+        CameraBackwards.Priority = 3;
+        CameraSideview.Priority = 1;
+        Debug.Log("backward camera");
+    }
+
+    internal void camarafrontview()
+    {
+        _orientation = 1;
+        CameraForward.Priority = 3;
+        CameraBackwards.Priority = 2;
+        CameraSideview.Priority = 1;
+        Debug.Log("forward camera");
+    }
+
+
     [SerializeField]
     private CinemachineVirtualCamera CameraSideview;
 
@@ -19,7 +48,7 @@ public class ExamplePlayerCamera : MonoBehaviour
 
     private void Start()
     {
-        _orientation = 0;
+        _orientation = 1;
     }
 
     private void Update()
@@ -28,28 +57,21 @@ public class ExamplePlayerCamera : MonoBehaviour
         _playerForward = transform.forward;
         _playerForward.Set(_playerForward.x, 0f, _playerForward.z);
 
-        if (_orientation != 1 && IsLookingForward())
-        {
-            _orientation = 1;
-            CameraForward.Priority = 3;
-            CameraBackwards.Priority = 2;
-            CameraSideview.Priority = 1;
-        }
-        else if (_orientation != -1 && IsLookingBackwards())
-        {
-            _orientation = -1;
-            CameraForward.Priority = 2;
-            CameraBackwards.Priority = 3;
-            CameraSideview.Priority = 1;
-        }
-        else if(_orientation != 0 && IsLookingRight())
-        {
-            _orientation = 0;
-            CameraForward.Priority = 1;
-            CameraBackwards.Priority = 2;
-            CameraSideview.Priority = 3;    
 
-        }   
+        
+        if (_orientation != 0)
+        {
+            if (_orientation != 1 && IsLookingForward())
+            {
+                camarafrontview();
+               
+            }
+            else if (_orientation != -1 && IsLookingBackwards())
+            {
+                camarabackview();
+                
+            }
+        }
     }
 
     private bool IsLookingForward()
