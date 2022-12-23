@@ -4,6 +4,18 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/crash camera.unity
+    guid: 82205e4ec87f48845ab3f9593edbf6ed
+  - enabled: 1
+    path: Assets/Scenes/Victory.unity
+    guid: 8f4f56052f28bfe48bb9aad78ca7877f
+  - enabled: 1
+    path: Assets/VictoryScreen.unity
+    guid: 36d537e1674b1f04ea9ed16aedf2857a
+  - enabled: 1
+    path: Assets/Scenes/gamedemo.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3b903af1f04859847b370164ae3eb38e, type: 2}
