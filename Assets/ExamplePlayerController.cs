@@ -21,6 +21,8 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
 
     private const float JumpForce = 32f;
     private const float Gravity = 15f;
+    private float _groundedTime = 0f;
+    public float Jumpcooldown;
 
     private float coyoteTime = 0.3f;
     private float coyoteTimeCounter;
@@ -46,11 +48,13 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
     {
         if (_controller.isGrounded)
         {
+            _groundedTime += Time.deltaTime;
             coyoteTimeCounter = coyoteTime;
             _animator.SetBool(_isJumpingHash, false);
         }
         else
         {
+            _groundedTime = 0f;
             coyoteTimeCounter -= Time.deltaTime;
         }
 
@@ -83,7 +87,7 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
 
     void ReadJumpInputs()
     {
-        if (_controller.isGrounded && _isJumpPressed)
+        if (_controller.isGrounded && _isJumpPressed && _groundedTime > Jumpcooldown)
         {
             _movementInput.y = JumpForce;
             _animator.SetBool(_isJumpingHash, true);
