@@ -14,6 +14,7 @@ public class Turretcontrol : MonoBehaviour
     public float fireRate, nextFire;
     public float initialMissDistance = 1.0f;
     float missDistance;
+    public bool autoFire = true;
 
     // Start is called before the first frame update
     void Start()
@@ -22,17 +23,21 @@ public class Turretcontrol : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
     }
 
+    bool CanShoot()
+    {
+        return (Time.time >= nextFire);
+    }
+
     // Update is called once per frame
     void Update()
     {
         dist = Vector3.Distance(Player.transform.position, transform.position);
         if(dist <= Maxdist)
         {
-            Vector3 prediction = PredictPlayerPosition(Player.transform.position, Player.velocity);
+            Vector3 prediction = PredictPlayerPosition(Player.transform.position + Vector3.up * 1.0f, Player.velocity);
             head.LookAt(prediction);
-            if (Time.time >= nextFire)
+            if (CanShoot() && autoFire)
             {
-                nextFire = Time.time +1f / fireRate;
                 head.LookAt(prediction + Random.onUnitSphere * missDistance);
                 shoot();
                 missDistance /= 2.0f;
@@ -68,11 +73,15 @@ public class Turretcontrol : MonoBehaviour
         return position + velocity * t;
     }
 
-    void shoot()
+    public void shoot()
     {
-       GameObject clone = Instantiate(projectile, barrel.position, head.rotation);
-        clone.GetComponent<Rigidbody>().AddForce(head.forward * projectilespeed, ForceMode.VelocityChange);
-       
+        if (CanShoot())
+        {
+               GameObject clone = Instantiate(projectile, barrel.position, head.rotation);
+                clone.GetComponent<Rigidbody>().AddForce(head.forward * projectilespeed, ForceMode.VelocityChange);
+            nextFire = Time.time + 1f / fireRate;
+        }
+
         //force Forward
 
     }
