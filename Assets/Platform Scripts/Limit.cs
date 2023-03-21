@@ -8,10 +8,10 @@ public class Limit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"{name} collides with {other.name}", gameObject);
+        //Debug.Log($"{name} collides with {other.name}", gameObject);
         if (other.tag =="Platform")
         {
-            Debug.Log("Reverse");
+           //Debug.Log("Reverse");
             platform.Reverse();
         }
     }

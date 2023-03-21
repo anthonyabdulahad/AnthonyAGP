@@ -15,6 +15,7 @@ public class TriggerButton : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"OnTriggerEnter {other.name}", other.gameObject);
         if (other.gameObject.tag == "Player")
         {
             state = !state;

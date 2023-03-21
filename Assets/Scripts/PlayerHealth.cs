@@ -9,11 +9,12 @@ public class PlayerHealth : MonoBehaviour
     public float health;
     public Slider slider;
     public Transform respawn;
-   
+    ExamplePlayerController player;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GetComponent<ExamplePlayerController>();
     }
 
     // Update is called once per frame
@@ -22,8 +23,9 @@ public class PlayerHealth : MonoBehaviour
         slider.value = health;
         if (health <= 0)
         {
-            transform.position = respawn.position;
+            player.RespawnTo(respawn.position);
             health = 100f;
+            Debug.Log($"Respawn player to {respawn.position}", gameObject);
         }
     }
     private void OnCollisionEnter(Collision hit)

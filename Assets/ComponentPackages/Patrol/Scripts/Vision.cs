@@ -42,7 +42,7 @@ public class Vision : MonoBehaviour
             bool canSee = !Physics.Raycast(new Ray(transform.position, transform.forward), out hit, viewDistance, layerMask);
             if (!canSee)
             {
-                Debug.Log($"View blocked by {hit.collider.name}", hit.collider.gameObject);
+                //Debug.Log($"View blocked by {hit.collider.name}", hit.collider.gameObject);
             }
             if (distance < viewDistance && Vector3.Angle(toPlayer, transform.forward) < 0.5f * fov && canSee)
             {

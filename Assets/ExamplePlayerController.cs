@@ -134,4 +134,16 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
     {
         platformMovement = platform;
     }
+
+    public void RespawnTo(Vector3 position)
+    {
+        _controller.enabled = false;
+        transform.position = position;
+        _controller.enabled = true;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log($"Player hits {other.name}", other.gameObject);
+    }
 }

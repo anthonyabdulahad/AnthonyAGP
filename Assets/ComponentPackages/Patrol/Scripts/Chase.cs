@@ -23,6 +23,7 @@ public class Chase : MonoBehaviour
         if (vision.target!= null)
         {
             Vector3 targetDirection = vision.target.position - transform.position;
+            targetDirection.y = 0f;
             float singleStep = speed * Time.deltaTime;
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
