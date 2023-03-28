@@ -19,8 +19,8 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
     public Vector3 _movementInput;
     private Vector3 _rotationInput;
 
-    private const float JumpForce = 32f;
-    private const float Gravity = 15f;
+    private const float JumpForce = 28f;
+    private const float Gravity = 9.8f;
     private float _groundedTime = 0f;
     public float Jumpcooldown;
 
@@ -48,6 +48,7 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
     {
         if (_controller.isGrounded)
         {
+            _movementInput.y = -2f;
             _groundedTime += Time.deltaTime;
             coyoteTimeCounter = coyoteTime;
             _animator.SetBool(_isJumpingHash, false);

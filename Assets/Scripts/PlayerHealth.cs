@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float health;
-    public Slider slider;
+    public LifeManager lifeManager;
     public Transform respawn;
     ExamplePlayerController player;
 
@@ -18,22 +18,19 @@ public class PlayerHealth : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Respawn()
     {
-        slider.value = health;
-        if (health <= 0)
-        {
-            player.RespawnTo(respawn.position);
-            health = 100f;
-            Debug.Log($"Respawn player to {respawn.position}", gameObject);
-        }
+        lifeManager.LoseLife();
+        player.RespawnTo(respawn.position);
+        Debug.Log($"Respawn player to {respawn.position}", gameObject);
     }
+
     private void OnCollisionEnter(Collision hit)
     {
         if (hit.collider.gameObject.tag == "Enemy")
         {
-            health = health - 20f;
-            Debug.Log("Hit Player");
+            Debug.Log($"Hit bullet id {hit.collider.GetInstanceID()} at position {hit.collider.transform.position}", hit.collider.gameObject);
+            Respawn();
         }
     }
 }
