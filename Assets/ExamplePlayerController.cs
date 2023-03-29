@@ -15,7 +15,7 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
 
     private CharacterController _controller;
     private const float MovementSpeed = 10f;
-    private const float RotationSpeed = 0.75f;
+    public float RotationSpeed = 0.75f;
     public Vector3 _movementInput;
     private Vector3 _rotationInput;
 
@@ -32,6 +32,7 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
     private bool _isJumpPressed;
 
     private Vector3 platformMovement;
+    private float currentSpeed = 10f;
 
     void Start()
     {
@@ -92,6 +93,7 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
         {
             _movementInput.y = JumpForce;
             _animator.SetBool(_isJumpingHash, true);
+            _isJumpPressed = false;
         }
 
         if (!_controller.isGrounded || _movementInput.y > 0)
@@ -102,33 +104,40 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
 
     void Move()
     {
-        if (_movementInput != Vector3.zero)
+        if (_controller.isGrounded)
         {
-            Vector3 moveDirection = Vector3.zero;
-            if (_movementInput.x != 0 || _movementInput.z != 0)
+            RotationSpeed = .15f;
+        }
+        else
+        {
+            RotationSpeed = .05f;
+        }
+            if (_movementInput != Vector3.zero)
             {
-                moveDirection = transform.TransformDirection(Vector3.forward) * MovementSpeed;
-                if (_controller.isGrounded)
+                Vector3 moveDirection = Vector3.zero;
+                if (_movementInput.x != 0 || _movementInput.z != 0)
                 {
-                    _animator.SetBool(_isRunningHash, true);
-                }
+                    moveDirection = transform.TransformDirection(Vector3.forward) * currentSpeed;
+                    if (_controller.isGrounded)
+                    {
+                     _animator.SetBool(_isRunningHash, true);
+                    }
                 
 
-            }
-            else
-            {
-                if (_controller.isGrounded)
+                }
+                else
                 {
-                    _animator.SetBool(_isRunningHash, false);
+                    if (_controller.isGrounded)
+                    {
+                        _animator.SetBool(_isRunningHash, false);
+                    }
+
                 }
 
+                moveDirection.y = _movementInput.y;
+                _controller.Move(moveDirection * Time.deltaTime + platformMovement);
+                transform.rotation = Quaternion.LookRotation(_rotationInput * Time.deltaTime);
             }
-            moveDirection.y = _movementInput.y;
-            _controller.Move(moveDirection * Time.deltaTime + platformMovement);
-            transform.rotation = Quaternion.LookRotation(_rotationInput * Time.deltaTime);
-           
-        }
-
     }
 
     public void SetPlatformMovement(Vector3 platform)
@@ -146,5 +155,10 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
     public void OnTriggerEnter(Collider other)
     {
         Debug.Log($"Player hits {other.name}", other.gameObject);
+    }
+
+    public void Dash(float dashSpeed)
+    {
+        currentSpeed = MovementSpeed * dashSpeed;
     }
 }
