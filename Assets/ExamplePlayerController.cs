@@ -33,6 +33,9 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
 
     private Vector3 platformMovement;
     private float currentSpeed = 10f;
+    internal object Controller;
+    public float Jump;
+   
 
     void Start()
     {
@@ -161,4 +164,10 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
     {
         currentSpeed = MovementSpeed * dashSpeed;
     }
-}
+
+    public void DoJump()
+    {
+        _movementInput.y = JumpForce;
+        _animator.SetBool(_isJumpingHash, true);
+    }
+}    
