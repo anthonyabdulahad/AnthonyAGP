@@ -35,6 +35,8 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
     private float currentSpeed = 10f;
     internal object Controller;
     public float Jump;
+
+    private bool isBouncingBox;
    
 
     void Start()
@@ -52,7 +54,8 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
     {
         if (_controller.isGrounded)
         {
-            _movementInput.y = -2f;
+            //_movementInput.y = -2f;
+
             _groundedTime += Time.deltaTime;
             coyoteTimeCounter = coyoteTime;
             _animator.SetBool(_isJumpingHash, false);
@@ -99,10 +102,10 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
             _isJumpPressed = false;
         }
 
-        if (!_controller.isGrounded || _movementInput.y > 0)
-        {
+        //if (!_controller.isGrounded || _movementInput.y > 0)
+        //{
             _movementInput.y += Physics.gravity.y * Gravity * Time.deltaTime;
-        }
+        //}
     }
 
     void Move()
@@ -115,7 +118,8 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
         {
             RotationSpeed = .05f;
         }
-            if (_movementInput != Vector3.zero)
+
+        if (_movementInput != Vector3.zero)
             {
                 Vector3 moveDirection = Vector3.zero;
                 if (_movementInput.x != 0 || _movementInput.z != 0)
@@ -168,6 +172,7 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
     public void DoJump()
     {
         _movementInput.y = JumpForce;
+        //_controller.Move(new Vector3(0f, 2f, 0f));
         _animator.SetBool(_isJumpingHash, true);
     }
 }    
