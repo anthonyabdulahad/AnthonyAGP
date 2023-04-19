@@ -1,9 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Quaternion = UnityEngine.Quaternion;
-using Vector3 = UnityEngine.Vector3;
- 
-public class ExamplePlayerController : MonoBehaviour, PlatformMovement
+
+public class MovementController : MonoBehaviour
 {
 
     [SerializeField]
@@ -21,21 +21,16 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
 
     private const float JumpForce = 28f;
     private const float Gravity = 9.8f;
-    private float _groundedTime = 0f;
-    public float Jumpcooldown;
 
-    private float coyoteTime = 0.3f;
-    private float coyoteTimeCounter;
-
-    private float jumpBufferTime = 2f;
-    private float jumpBufferCounter;
     private bool _isJumpPressed;
 
     private Vector3 platformMovement;
     private float currentSpeed = 10f;
     internal object Controller;
     public float Jump;
-   
+
+    private bool isBouncingBox = false;
+
 
     void Start()
     {
@@ -44,33 +39,20 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
         _isRunningHash = Animator.StringToHash("IsRunning");
         _isJumpingHash = Animator.StringToHash("isJumping");
     }
+
     public void OnJump(InputValue context)
     {
         _isJumpPressed = context.isPressed;
     }
+
     void Update()
     {
+        Debug.Log(_controller.isGrounded ? "GROUNDED" : "NOT GROUNDED");
         if (_controller.isGrounded)
         {
-            _movementInput.y = -2f;
-            _groundedTime += Time.deltaTime;
-            coyoteTimeCounter = coyoteTime;
             _animator.SetBool(_isJumpingHash, false);
         }
-        else
-        {
-            _groundedTime = 0f;
-            coyoteTimeCounter -= Time.deltaTime;
-        }
 
-        if (_isJumpPressed)
-        {
-            jumpBufferCounter = jumpBufferTime;
-        }
-        else
-        {
-            jumpBufferCounter -= Time.deltaTime;
-        }
         ReadMovementInputs();
         ReadJumpInputs();
         Move();
@@ -92,14 +74,15 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
 
     void ReadJumpInputs()
     {
-        if (_controller.isGrounded && _isJumpPressed && _groundedTime > Jumpcooldown)
+        if ((_controller.isGrounded && _isJumpPressed) || isBouncingBox)
         {
             _movementInput.y = JumpForce;
             _animator.SetBool(_isJumpingHash, true);
             _isJumpPressed = false;
+            isBouncingBox = false;
         }
 
-        if (!_controller.isGrounded || _movementInput.y > 0)
+        if (!_controller.isGrounded || _movementInput.y > -2)
         {
             _movementInput.y += Physics.gravity.y * Gravity * Time.deltaTime;
         }
@@ -115,32 +98,33 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
         {
             RotationSpeed = .05f;
         }
-            if (_movementInput != Vector3.zero)
+
+        if (_movementInput != Vector3.zero)
+        {
+            Vector3 moveDirection = Vector3.zero;
+            if (_movementInput.x != 0 || _movementInput.z != 0)
             {
-                Vector3 moveDirection = Vector3.zero;
-                if (_movementInput.x != 0 || _movementInput.z != 0)
+                moveDirection = transform.TransformDirection(Vector3.forward) * currentSpeed;
+                if (_controller.isGrounded)
                 {
-                    moveDirection = transform.TransformDirection(Vector3.forward) * currentSpeed;
-                    if (_controller.isGrounded)
-                    {
-                     _animator.SetBool(_isRunningHash, true);
-                    }
-                
-
-                }
-                else
-                {
-                    if (_controller.isGrounded)
-                    {
-                        _animator.SetBool(_isRunningHash, false);
-                    }
-
+                    _animator.SetBool(_isRunningHash, true);
                 }
 
-                moveDirection.y = _movementInput.y;
-                _controller.Move(moveDirection * Time.deltaTime + platformMovement);
-                transform.rotation = Quaternion.LookRotation(_rotationInput * Time.deltaTime);
+
             }
+            else
+            {
+                if (_controller.isGrounded)
+                {
+                    _animator.SetBool(_isRunningHash, false);
+                }
+
+            }
+
+            moveDirection.y = _movementInput.y;
+            _controller.Move(moveDirection * Time.deltaTime + platformMovement);
+            transform.rotation = Quaternion.LookRotation(_rotationInput * Time.deltaTime);
+        }
     }
 
     public void SetPlatformMovement(Vector3 platform)
@@ -167,7 +151,8 @@ public class ExamplePlayerController : MonoBehaviour, PlatformMovement
 
     public void DoJump()
     {
+        isBouncingBox = true;
         _movementInput.y = JumpForce;
         _animator.SetBool(_isJumpingHash, true);
     }
-}    
+}

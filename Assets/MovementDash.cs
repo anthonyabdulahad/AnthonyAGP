@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class MovementDash : MonoBehaviour
 {
-    ExamplePlayerController moveScript;
+    MovementController moveScript;
 
     public bool _isDashPressed;
     public float DashSpeed;
@@ -17,7 +17,7 @@ public class MovementDash : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moveScript = GetComponent<ExamplePlayerController>();
+        moveScript = GetComponent<MovementController>();
     }
 
     // Update is called once per frame

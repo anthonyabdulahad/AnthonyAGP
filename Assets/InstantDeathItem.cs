@@ -15,7 +15,7 @@ public class InstantDeathItem : MonoBehaviour
         {
            
             lifeManager.LoseLife();
-            other.GetComponent<ExamplePlayerController>().RespawnTo(respawn.position);
+            other.GetComponent<MovementController>().RespawnTo(respawn.position);
 
             if (destroyonhit)
             {

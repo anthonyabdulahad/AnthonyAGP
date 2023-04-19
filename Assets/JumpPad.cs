@@ -13,6 +13,7 @@ public class JumpPad : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.SendMessage("DoJump");
+            //Destroy(gameObject);
         }
     }
 }

@@ -9,12 +9,12 @@ public class PlayerHealth : MonoBehaviour
 {
     public LifeManager lifeManager;
     public Transform respawn;
-    ExamplePlayerController player;
+    MovementController player;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponent<ExamplePlayerController>();
+        player = GetComponent<MovementController>();
     }
 
     // Update is called once per frame
