@@ -85,7 +85,7 @@ public class MovementController : MonoBehaviour
         if (!_controller.isGrounded || _movementInput.y > -2)
         {
             _movementInput.y += Physics.gravity.y * Gravity * Time.deltaTime;
-        //}
+        }
     }
 
     void Move()
