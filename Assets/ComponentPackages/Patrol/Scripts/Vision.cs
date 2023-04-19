@@ -39,12 +39,26 @@ public class Vision : MonoBehaviour
             Vector3 toPlayer = player.transform.position - transform.position;
             float distance = toPlayer.magnitude;
             RaycastHit hit;
-            bool canSee = !Physics.Raycast(new Ray(transform.position, transform.forward), out hit, viewDistance, layerMask);
-            if (!canSee)
+            bool canSee = distance < viewDistance && Vector3.Angle(toPlayer, transform.forward) < 0.5f * fov;
+            if (canSee)
             {
-                //Debug.Log($"View blocked by {hit.collider.name}", hit.collider.gameObject);
+                if (Physics.Raycast(new Ray(transform.position, toPlayer), out hit, viewDistance, layerMask))
+                {
+                    if (hit.collider.gameObject != player.gameObject)
+                    {
+                        canSee = false;
+                    }
+                }
+                
+                if (!canSee)
+                {
+                    Debug.Log($"View blocked by {hit.collider.name}", hit.collider.gameObject);
+                }
             }
-            if (distance < viewDistance && Vector3.Angle(toPlayer, transform.forward) < 0.5f * fov && canSee)
+               
+
+            
+            if (canSee)
             {
                 rangeToTarget = distance;
                 if (target == null)
