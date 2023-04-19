@@ -85,7 +85,7 @@ public class MovementController : MonoBehaviour
         if (!_controller.isGrounded || _movementInput.y > -2)
         {
             _movementInput.y += Physics.gravity.y * Gravity * Time.deltaTime;
-        }
+        //}
     }
 
     void Move()
@@ -153,6 +153,7 @@ public class MovementController : MonoBehaviour
     {
         isBouncingBox = true;
         _movementInput.y = JumpForce;
+        //_controller.Move(new Vector3(0f, 2f, 0f));
         _animator.SetBool(_isJumpingHash, true);
     }
 }
