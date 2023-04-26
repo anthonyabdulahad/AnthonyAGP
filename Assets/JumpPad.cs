@@ -9,6 +9,8 @@ public class JumpPad : MonoBehaviour
     public bool candestroy;
     Animator _animator;
 
+    public GameObject itemToDrop;
+
     private void Start()
     {
         _animator = GetComponent<Animator>();
@@ -22,6 +24,8 @@ public class JumpPad : MonoBehaviour
             other.SendMessage("DoJump");
             if (candestroy)
             {
+                GameObject inst = Instantiate(itemToDrop, transform.position, Quaternion.identity);
+                Debug.Log("INSTANTIATE: " + inst.name);
                 Destroy(gameObject);
             }
 

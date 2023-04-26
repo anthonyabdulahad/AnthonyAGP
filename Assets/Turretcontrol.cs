@@ -16,6 +16,13 @@ public class Turretcontrol : MonoBehaviour
     float missDistance;
     public bool autoFire = true;
 
+
+    public bool stationary;
+    public int bulletBurstCount = 3;
+    public float bulletBurstDelay = 2f;
+    private int currentBulletShot = 0;
+    private float currentTimeDelay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,22 +38,48 @@ public class Turretcontrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        dist = Vector3.Distance(Player.transform.position, transform.position);
-        if(dist <= Maxdist)
+        if (!stationary) // Shoot At Player
         {
-            Vector3 prediction = PredictPlayerPosition(Player.transform.position + Vector3.up * 1.0f, Player.velocity);
-            head.LookAt(prediction);
-            if (CanShoot() && autoFire)
+
+
+            dist = Vector3.Distance(Player.transform.position, transform.position);
+            if (dist <= Maxdist)
             {
-                head.LookAt(prediction + Random.onUnitSphere * missDistance);
-                shoot();
-                missDistance /= 2.0f;
+                Vector3 prediction = PredictPlayerPosition(Player.transform.position + Vector3.up * 1.0f, Player.velocity);
+                head.LookAt(prediction);
+                if (CanShoot() && autoFire)
+                {
+                    head.LookAt(prediction + Random.onUnitSphere * missDistance);
+                    shoot();
+                    missDistance /= 2.0f;
+                }
+
             }
-           
+            else
+            {
+                missDistance = initialMissDistance;
+            }
         }
-        else
+        else // Shoot Straight
         {
-            missDistance = initialMissDistance;
+            if (currentBulletShot < bulletBurstCount)
+            {
+                if (CanShoot() && autoFire)
+                {
+                    shoot();
+                    currentBulletShot++;
+                }
+            }
+            else
+            {
+                currentTimeDelay += Time.deltaTime;
+                if (currentTimeDelay > bulletBurstDelay)
+                {
+                    currentBulletShot = 0;
+                    currentTimeDelay = 0f;
+
+                }
+            }
         }
 
     }

@@ -11,9 +11,12 @@ public class Itempickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            if (lifeManager == null)
+                lifeManager = FindObjectOfType<LifeManager>();
+
+            lifeManager.ExtraLife();
             Destroy(gameObject);
             //renderer.enabled = false;
-            lifeManager.ExtraLife();
         }
     }
 }
