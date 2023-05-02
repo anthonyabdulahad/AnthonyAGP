@@ -23,6 +23,9 @@ public class LifeManager : MonoBehaviour
     public void LoseLife()
     {
         Debug.Log($"lifelose was {lives} now {lives-1}");
+        PlayerHealth health = FindObjectOfType<PlayerHealth>();
+        health.Respawn();
+
         lives--;
         if (lives == 0)
         {

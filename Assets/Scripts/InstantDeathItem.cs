@@ -2,21 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Itempickup : MonoBehaviour
+public class InstantDeathItem : MonoBehaviour
 {
     public LifeManager lifeManager;
     public new Renderer renderer;
+    public Transform respawn;
+    public bool destroyonhit;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (lifeManager == null)
-                lifeManager = FindObjectOfType<LifeManager>();
+           
+            lifeManager.LoseLife();
 
-            lifeManager.ExtraLife();
-            Destroy(gameObject);
-            //renderer.enabled = false;
+            if (destroyonhit)
+            {
+                Destroy(gameObject);
+            }
+            
         }
+
+
     }
 }

@@ -18,11 +18,10 @@ public class PlayerHealth : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Respawn()
+    public void Respawn()
     {
-        lifeManager.LoseLife();
         player.RespawnTo(respawn.position);
-        Debug.Log($"Respawn player to {respawn.position}", gameObject);
+        Debug.Log($"Respawn player to {respawn.name}", gameObject);
     }
 
     private void OnCollisionEnter(Collision hit)
@@ -30,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
         if (hit.collider.gameObject.tag == "Enemy")
         {
             Debug.Log($"Hit bullet id {hit.collider.GetInstanceID()} at position {hit.collider.transform.position}", hit.collider.gameObject);
-            Respawn();
+            lifeManager.LoseLife();
         }
     }
 }
