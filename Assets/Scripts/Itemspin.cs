@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Itemspin : MonoBehaviour
 {
-
+    public bool rotatex;
     
 
     void Update()
     {
-        transform.Rotate(0f, 100 * Time.deltaTime, 0f, Space.Self);   
+        if (rotatex)
+        {
+            transform.Rotate(0f, 0f , 100f * Time.deltaTime, Space.Self);
+        }
+        else
+        transform.Rotate(0f, 100f * Time.deltaTime, 0f, Space.Self);   
     }
 }
