@@ -43,6 +43,25 @@ public class Explode : MonoBehaviour
             mController.RespawnTo(GameObject.FindWithTag("Respawn").transform.position);
             FindObjectOfType<LifeManager>().LoseLife();
         }
+
+        Destroy(GetComponent<Patrol>());
+        Destroy(GetComponent<AI>());
+        Destroy(GetComponent<Chase>());
+        Destroy(GetComponent<CapsuleCollider>());
+        Destroy(this);
+    }
+
+    public void DoExplosionNoDamage()
+    {
+        ps.Play();
+        Enemyparts.SetActive(true);
+        Kamienemy.SetActive(false);
+
+        Destroy(GetComponent<Patrol>());
+        Destroy(GetComponent<AI>());
+        Destroy(GetComponent<Chase>());
+        Destroy(GetComponent<CapsuleCollider>());
+        Destroy(this);
     }
 
     public void StartCountdown()
