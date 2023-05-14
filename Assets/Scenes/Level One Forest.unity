@@ -376,7 +376,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -651,7 +651,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3779,75 +3779,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d42c85a892079064e836e25438948dab, type: 3}
---- !u!1001 &1293582447
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 30.72735
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 30.72735
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 30.72735
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -90.2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 120.3
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -168.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.6668208
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.74521804
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 96.356
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
-      propertyPath: m_Name
-      value: oil mill
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
 --- !u!1001 &1313250812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8403,6 +8334,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 496816022520214927, guid: c04488d93ee42a14cbc9fc9a7f3edb5a, type: 3}
   m_PrefabInstance: {fileID: 260350852327707878}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &543450652440258436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148166278462}
+  m_LocalRotation: {x: -0, y: 0.74521804, z: -0, w: 0.6668208}
+  m_LocalPosition: {x: -90.2, y: 120.3, z: -168.5}
+  m_LocalScale: {x: 30.72735, y: 30.72735, z: 30.72735}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 96.356, z: 0}
 --- !u!4 &543450653171529828
 Transform:
   m_ObjectHideFlags: 0
@@ -8448,6 +8394,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4238741402945223933, guid: 7d6e3b4c13e5a4e428c911a5532914de, type: 3}
   m_PrefabInstance: {fileID: 3599722430714249156}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &919132148166278462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 543450652440258436}
+  - component: {fileID: 3469287838504773665}
+  - component: {fileID: 1711813854779415787}
+  m_Layer: 0
+  m_Name: oil mill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &919132148643816158
 GameObject:
   m_ObjectHideFlags: 0
@@ -8522,6 +8486,48 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1140181383061097742, guid: 9b638971515f90d4387a8be6c5318e76, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9b638971515f90d4387a8be6c5318e76, type: 3}
+--- !u!23 &1711813854779415787
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148166278462}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 5561349426305759274, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!4 &2059904562938001697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8139689084807532129, guid: d892ed28838b8c245bd6ca2a0a538fd6, type: 3}
@@ -8784,6 +8790,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3399270674205468108, guid: 52f7c9666126e8a4986e5e19761ec2b3, type: 3}
   m_PrefabInstance: {fileID: 47999110230559322}
   m_PrefabAsset: {fileID: 0}
+--- !u!33 &3469287838504773665
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148166278462}
+  m_Mesh: {fileID: -180220538305817714, guid: ac1c4f9a10e56ac42bfce0c8f420ab41, type: 3}
 --- !u!1001 &3599722430714249156
 PrefabInstance:
   m_ObjectHideFlags: 0
