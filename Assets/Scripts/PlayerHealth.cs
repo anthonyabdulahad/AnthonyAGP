@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public LifeManager lifeManager;
     public Transform respawn;
     MovementController player;
+    public Animator animatorfade;
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +21,15 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     public void Respawn()
     {
-        player.RespawnTo(respawn.position);
+        player._controller.enabled = false;
+        animatorfade.SetTrigger("FadeIn");
+        Invoke("respawnplayer", 0.8f);
         Debug.Log($"Respawn player to {respawn.name}", gameObject);
+    }
+
+    private void respawnplayer()
+    {
+     player.RespawnTo(respawn.position);
     }
 
     private void OnCollisionEnter(Collision hit)

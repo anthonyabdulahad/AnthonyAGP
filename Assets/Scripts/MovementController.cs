@@ -13,7 +13,8 @@ public class MovementController : MonoBehaviour
     int _isRunningHash;
     int _isJumpingHash;
 
-    private CharacterController _controller;
+    public Animator Animatorfade;
+    public CharacterController _controller;
     private const float MovementSpeed = 10f;
     public float RotationSpeed = 0.75f;
     public Vector3 _movementInput;
@@ -134,9 +135,11 @@ public class MovementController : MonoBehaviour
 
     public void RespawnTo(Vector3 position)
     {
+
         _controller.enabled = false;
         transform.position = position;
         _controller.enabled = true;
+        Animatorfade.SetTrigger("FadeOut");
     }
 
     public void OnTriggerEnter(Collider other)

@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menutheme.unity
+    guid: dbece1cd538aeb744b9ee424321022f1
+  - enabled: 1
+    path: Assets/Level One Forest.unity
+    guid: 7016b11df807fee4f824d639ab4bd6ca
+  - enabled: 1
     path: Assets/Scenes/crash camera.unity
     guid: 82205e4ec87f48845ab3f9593edbf6ed
   - enabled: 1
