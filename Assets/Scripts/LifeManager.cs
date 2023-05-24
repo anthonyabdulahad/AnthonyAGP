@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class LifeManager : MonoBehaviour
 {
+    public string currentscene;
+
     public int startingLives;
     public TMP_Text text;
     int lives;
@@ -29,7 +31,8 @@ public class LifeManager : MonoBehaviour
         lives--;
         if (lives == 0)
         {
-            SceneManager.LoadScene("Crash camera");
+            SceneManager.LoadScene(currentscene);
+
         }
     }
 

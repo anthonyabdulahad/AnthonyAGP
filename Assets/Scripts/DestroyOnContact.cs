@@ -10,8 +10,13 @@ public class DestroyOnContact : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log(collision.gameObject.name);
-        //Collider col = collision.gameObject.GetComponent<Collider>();
-        //Physics.IgnoreCollision(col, GetComponent<Collider>());
-        Destroy(gameObject);
+     
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

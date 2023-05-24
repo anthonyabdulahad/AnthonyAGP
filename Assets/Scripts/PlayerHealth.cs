@@ -30,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
     private void respawnplayer()
     {
      player.RespawnTo(respawn.position);
+     animatorfade.SetTrigger("FadeOut");
     }
 
     private void OnCollisionEnter(Collision hit)
@@ -37,6 +38,14 @@ public class PlayerHealth : MonoBehaviour
         if (hit.collider.gameObject.tag == "Enemy")
         {
             Debug.Log($"Hit bullet id {hit.collider.GetInstanceID()} at position {hit.collider.transform.position}", hit.collider.gameObject);
+            lifeManager.LoseLife();
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+           
             lifeManager.LoseLife();
         }
     }

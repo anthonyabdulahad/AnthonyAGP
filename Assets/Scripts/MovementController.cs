@@ -13,6 +13,11 @@ public class MovementController : MonoBehaviour
     int _isRunningHash;
     int _isJumpingHash;
 
+    public AudioSource audio;
+    public AudioClip Run;
+    public AudioClip jets;
+    public AudioClip jump;
+
     public Animator Animatorfade;
     public CharacterController _controller;
     private const float MovementSpeed = 10f;
@@ -77,6 +82,8 @@ public class MovementController : MonoBehaviour
     {
         if ((_controller.isGrounded && _isJumpPressed) || isBouncingBox)
         {
+            audio.clip = jump;
+            audio.Play();
             _movementInput.y = JumpForce;
             _animator.SetBool(_isJumpingHash, true);
             _isJumpPressed = false;
@@ -108,7 +115,10 @@ public class MovementController : MonoBehaviour
                 moveDirection = transform.TransformDirection(Vector3.forward) * currentSpeed;
                 if (_controller.isGrounded)
                 {
+                    audio.clip = Run;
+                    audio.Play();
                     _animator.SetBool(_isRunningHash, true);
+
                 }
 
 
