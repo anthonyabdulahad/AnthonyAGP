@@ -22697,6 +22697,10 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7206821353537415371, guid: 7d9d3fff950baad49a6f5ea4a8636b66, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e13c2aa48c4fb854c875bbad8172afef, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d9d3fff950baad49a6f5ea4a8636b66, type: 3}
 --- !u!1001 &1160853923
@@ -22923,9 +22927,107 @@ MonoBehaviour:
   m_Waypoints:
   - position: {x: -3.986967, y: -0.6649088, z: 5.732554}
     roll: 0
-  - position: {x: -9.39011, y: -2.162594, z: 3.3015373}
+  - position: {x: -9.390117, y: -2.9616325, z: 3.3015118}
     roll: 0
-  - position: {x: -14.793235, y: -5.029347, z: 3.074807}
+  - position: {x: -14.793242, y: -6.0460615, z: 3.0747814}
+    roll: 0
+  - position: {x: -20.329472, y: -8.542429, z: 3.7146938}
+    roll: 0
+  - position: {x: -26.068604, y: -12.1363535, z: 8.643422}
+    roll: 0
+  - position: {x: -31.57601, y: -21.201275, z: 8.674035}
+    roll: 0
+  - position: {x: -36.870518, y: -30.730318, z: 4.2033634}
+    roll: 0
+  - position: {x: -42.136253, y: -34.02653, z: -0.8760828}
+    roll: 0
+  - position: {x: -48.296947, y: -36.138306, z: -1.8093054}
+    roll: 0
+  - position: {x: -54.590187, y: -40.407955, z: 0.05817186}
+    roll: 0
+  - position: {x: -61.00593, y: -45.22171, z: 4.5163703}
+    roll: 0
+  - position: {x: -67.15696, y: -56.694115, z: 3.3781781}
+    roll: 0
+  - position: {x: -73.308, y: -60.056446, z: 2.2399838}
+    roll: 0
+  - position: {x: -79.45909, y: -62.156647, z: 1.1017828}
+    roll: 0
+  - position: {x: -85.62091, y: -62.85607, z: 0.18979506}
+    roll: 0
+  - position: {x: -91.771126, y: -62.927467, z: -0.9671894}
+    roll: 0
+  - position: {x: -97.746994, y: -62.99887, z: -5.8100424}
+    roll: 0
+  - position: {x: -103.82929, y: -63.070267, z: -8.402761}
+    roll: 0
+  - position: {x: -109.91159, y: -63.141663, z: -10.995481}
+    roll: 0
+  - position: {x: -116.126495, y: -63.213062, z: -10.785289}
+    roll: 0
+  - position: {x: -122.51665, y: -63.28447, z: -6.8708925}
+    roll: 0
+  - position: {x: -128.9068, y: -63.355877, z: -2.9564962}
+    roll: 0
+  - position: {x: -134.98894, y: -63.427296, z: -5.5543833}
+    roll: 0
+  - position: {x: -141.11517, y: -63.498714, z: -7.219139}
+    roll: 0
+  - position: {x: -146.83463, y: -63.02648, z: -17.48393}
+    roll: 0
+  - position: {x: -147.00165, y: -63.641567, z: -27.018633}
+    roll: 0
+  - position: {x: -147.16869, y: -70.07123, z: -36.553383}
+    roll: 0
+  - position: {x: -147.33574, y: -74.35863, z: -46.088154}
+    roll: 0
+  - position: {x: -143.773, y: -75.33598, z: -55.132496}
+    roll: 0
+  - position: {x: -140.21025, y: -76.31334, z: -64.176834}
+    roll: 0
+  - position: {x: -140.82828, y: -75.36614, z: -79.56028}
+    roll: 0
+  - position: {x: -141.57861, y: -75.63875, z: -94.96114}
+    roll: 0
+  - position: {x: -146.45245, y: -73.98871, z: -105.92448}
+    roll: 0
+  - position: {x: -150.52661, y: -75.32893, z: -105.88181}
+    roll: 0
+  - position: {x: -154.69695, y: -78.680374, z: -103.80693}
+    roll: 0
+  - position: {x: -158.86728, y: -82.031815, z: -101.73205}
+    roll: 0
+  - position: {x: -162.83376, y: -83.77488, z: -103.96786}
+    roll: 0
+  - position: {x: -166.74527, y: -86.50252, z: -107.363365}
+    roll: 0
+  - position: {x: -170.73087, y: -92.187546, z: -109.1936}
+    roll: 0
+  - position: {x: -175.51869, y: -96.53733, z: -113.06033}
+    roll: 0
+  - position: {x: -181.28708, y: -97.99592, z: -113.716095}
+    roll: 0
+  - position: {x: -188.85109, y: -98.42308, z: -114.607994}
+    roll: 0
+  - position: {x: -194.61702, y: -98.61347, z: -124.86748}
+    roll: 0
+  - position: {x: -194.29309, y: -98.80387, z: -134.32622}
+    roll: 0
+  - position: {x: -193.96916, y: -98.99427, z: -143.78496}
+    roll: 0
+  - position: {x: -193.64523, y: -99.18467, z: -153.2437}
+    roll: 0
+  - position: {x: -193.3213, y: -99.37507, z: -162.70244}
+    roll: 0
+  - position: {x: -192.99738, y: -99.56547, z: -172.16118}
+    roll: 0
+  - position: {x: -192.67345, y: -99.75587, z: -181.61992}
+    roll: 0
+  - position: {x: -192.34952, y: -99.946266, z: -191.07866}
+    roll: 0
+  - position: {x: -192.02559, y: -100.136665, z: -200.5374}
+    roll: 0
+  - position: {x: -199.44595, y: -100.32708, z: -203.74435}
     roll: 0
 --- !u!4 &1175178216
 Transform:
