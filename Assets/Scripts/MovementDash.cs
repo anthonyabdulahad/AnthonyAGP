@@ -27,8 +27,8 @@ public class MovementDash : MonoBehaviour
     {
         if (_isDashPressed && !dashing)
         {
-            audio.clip = jet;
-            audio.Play();
+            //audio.clip = jet;
+            //audio.Play();
             dashing = true;
             StartCoroutine(Dash());
             _isDashPressed = false;
