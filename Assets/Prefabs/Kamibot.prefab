@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: ad090ebb3900a214b93a00dd6e4130ee, type: 3}
+  - {fileID: 2100000, guid: 7ad91449f65caea4a8a202fd036c0bc9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -522,8 +522,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: ad090ebb3900a214b93a00dd6e4130ee, type: 3}
-  - {fileID: 6271573414225017425, guid: ad090ebb3900a214b93a00dd6e4130ee, type: 3}
+  - {fileID: 2100000, guid: ef8e20c9b0e6fd84fbae78e0512a06e9, type: 2}
+  - {fileID: 2100000, guid: d988dc371eda2774e9bd987a211a467c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -556,6 +556,8 @@ GameObject:
   - component: {fileID: 255613343907544846}
   - component: {fileID: 2255878028229754712}
   - component: {fileID: 4342373623531730188}
+  - component: {fileID: 973062294}
+  - component: {fileID: 973062293}
   m_Layer: 0
   m_Name: pCylinder3
   m_TagString: Untagged
@@ -606,7 +608,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: ad090ebb3900a214b93a00dd6e4130ee, type: 3}
+  - {fileID: 2100000, guid: 4b0210d83b39a1d4a9808e22bb502994, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -628,6 +630,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &973062294
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5088192082294488281}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.32, y: 0.48, z: 1.44}
+  m_Center: {x: 0, y: 0.38, z: 0}
+--- !u!114 &973062293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5088192082294488281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93175b58bba1d86499134f16e3e67788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainRobotParent: {fileID: 6137130771834725854}
 --- !u!1 &6137130770593640272
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,6 +1017,7 @@ GameObject:
   - component: {fileID: 6137130771834725845}
   - component: {fileID: 6137130771834725674}
   - component: {fileID: 6423172273693890080}
+  - component: {fileID: 2795035684298455674}
   m_Layer: 0
   m_Name: Kamibot
   m_TagString: Enemy
@@ -1077,9 +1106,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.59
-  m_Height: 3.66
+  m_Height: 3.2695322
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.19523406, z: 0}
 --- !u!195 &6137130771834725841
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1289,11 +1318,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40f98485b218e942a7194312e7e8149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 0}
   explodeTime: 5
-  explodeRadius: 2
+  explodeRadius: 4
   Enemyparts: {fileID: 9062471885802233033}
   Kamienemy: {fileID: 8186729095518085539}
   ps: {fileID: 4335002501389041207}
+--- !u!82 &2795035684298455674
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6137130771834725854}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: fd6c22140c86c2e4cbfd213b4b5e85e2, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.962
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6137130771873382445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1637,7 +1763,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: ad090ebb3900a214b93a00dd6e4130ee, type: 3}
+  - {fileID: 2100000, guid: ef8e20c9b0e6fd84fbae78e0512a06e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1683,7 +1809,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8186729095518085539}
   m_LocalRotation: {x: -0, y: -0.76591617, z: 0, w: 0.64294046}
-  m_LocalPosition: {x: 0.104285, y: 0.20446652, z: 1.3036077}
+  m_LocalPosition: {x: 0.063, y: 0.20446652, z: 1.538}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

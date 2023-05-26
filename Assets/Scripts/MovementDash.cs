@@ -8,7 +8,7 @@ public class MovementDash : MonoBehaviour
 {
     MovementController moveScript;
 
-    public AudioSource audio;
+    public AudioSource audiojet;
     public AudioClip jet;
     public bool _isDashPressed;
     public float DashSpeed;
@@ -27,8 +27,8 @@ public class MovementDash : MonoBehaviour
     {
         if (_isDashPressed && !dashing)
         {
-            //audio.clip = jet;
-            //audio.Play();
+            
+            audiojet.Play();
             dashing = true;
             StartCoroutine(Dash());
             _isDashPressed = false;

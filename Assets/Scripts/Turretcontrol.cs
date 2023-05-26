@@ -16,7 +16,7 @@ public class Turretcontrol : MonoBehaviour
     float missDistance;
     public bool autoFire = true;
 
-
+    public AudioSource explosion;
     public bool stationary;
     public int bulletBurstCount = 3;
     public float bulletBurstDelay = 2f;
@@ -110,6 +110,7 @@ public class Turretcontrol : MonoBehaviour
     {
         if (CanShoot())
         {
+            explosion.Play();
                GameObject clone = Instantiate(projectile, barrel.position, head.rotation);
                 clone.GetComponent<Rigidbody>().AddForce(head.forward * projectilespeed, ForceMode.VelocityChange);
             nextFire = Time.time + 1f / fireRate;

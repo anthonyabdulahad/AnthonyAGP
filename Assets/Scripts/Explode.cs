@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Explode : MonoBehaviour
 {
+    public AudioSource explosion;
     public float explodeTime = 5f;
     public float explodeRadius = 2f;
     float timer = 0f;
@@ -23,6 +24,7 @@ public class Explode : MonoBehaviour
             if (timer <= 0f)
             {
                 DoExplosion();
+
             }
         }
     }
@@ -30,6 +32,7 @@ public class Explode : MonoBehaviour
     void DoExplosion()
     {
         ps.Play();
+        explosion.Play();
         Debug.Log("EXPLODE");
 
         // Check how far the player is

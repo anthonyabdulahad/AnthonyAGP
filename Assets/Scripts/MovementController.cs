@@ -13,7 +13,8 @@ public class MovementController : MonoBehaviour
     int _isRunningHash;
     int _isJumpingHash;
 
-    public AudioSource audio;
+    public AudioSource audiojump;
+    public AudioSource audiorun;
     public AudioClip Run;
     public AudioClip jets;
     public AudioClip jump;
@@ -82,8 +83,9 @@ public class MovementController : MonoBehaviour
     {
         if ((_controller.isGrounded && _isJumpPressed) || isBouncingBox)
         {
-            audio.clip = jump;
-            audio.Play();
+
+            audiojump.Play();
+
             _movementInput.y = JumpForce;
             _animator.SetBool(_isJumpingHash, true);
             _isJumpPressed = false;
@@ -115,8 +117,11 @@ public class MovementController : MonoBehaviour
                 moveDirection = transform.TransformDirection(Vector3.forward) * currentSpeed;
                 if (_controller.isGrounded)
                 {
-                    audio.clip = Run;
-                    audio.Play();
+                    if (!audiorun.isPlaying)
+                    {
+                        audiorun.Play();
+                    }
+                    
                     _animator.SetBool(_isRunningHash, true);
 
                 }
@@ -128,6 +133,7 @@ public class MovementController : MonoBehaviour
                 if (_controller.isGrounded)
                 {
                     _animator.SetBool(_isRunningHash, false);
+                    audiorun.Stop();
                 }
 
             }
