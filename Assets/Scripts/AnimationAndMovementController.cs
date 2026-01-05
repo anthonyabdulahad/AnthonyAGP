@@ -50,7 +50,7 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
 
     private float coyoteTime = 0.3f;
     private float coyoteTimeCounter;
-
+    [SerializeField] public float _walkSpeed = 2.0f;
     private float jumpBufferTime = 2f;
     private float jumpBufferCounter;
 
@@ -193,8 +193,8 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
     void OnMove(InputValue value)
     {
         _currentMovementInput = value.Get<Vector2>();
-        _currentMovement.x = _currentMovementInput.x;
-        _currentMovement.z = _currentMovementInput.y;
+        _currentMovement.x = _currentMovementInput.x *_walkSpeed;
+        _currentMovement.z = _currentMovementInput.y *_walkSpeed;
         _currentRunMovement.x = _currentMovementInput.x * _runMultiplier;
         _currentRunMovement.z = _currentMovementInput.y * _runMultiplier;
         _isMovementPressed = _currentMovementInput.x != 0 || _currentMovementInput.y != 0;
@@ -325,8 +325,8 @@ public class AnimationAndMovementController : MonoBehaviour, PlatformMovement
             }
             else
             {
-                _appliedMovement.x = _currentMovement.x;
-                _appliedMovement.z = _currentMovement.z;
+                _appliedMovement.x = _currentMovement.x * _walkSpeed;
+                _appliedMovement.z = _currentMovement.z * _walkSpeed;
             }
         }
 
